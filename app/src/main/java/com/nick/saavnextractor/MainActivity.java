@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,9 +41,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import java.io.File;
 
-/**
- * Created by Nick on 12-Nov-16.
- */
 public class MainActivity extends AppCompatActivity {
     public int STORAGE_PERMISSION_CODE =23 ;
     public static final String logtag = "Nick";
@@ -312,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
                         File saavnsong = new File (saavndir+"/songs/curr.mp3");
                         File saavnsong2 = new File (saavndir+"/songs/curr.mp4");
                         final String outdir = sdcard + "/Music";
-                        final File  songname = new File (outdir+"/"+mText.getText().toString()+extension);
+                        final File  songname = new File (outdir+"/"+mText.getText().toString()+".mp3");
 
                         try {
                             if (saavnsong.exists()) {
@@ -338,7 +336,9 @@ public class MainActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             Intent intent = new Intent();
                                             intent.setAction(Intent.ACTION_VIEW);
-                                            intent.setDataAndType(Uri.fromFile(songname), "audio/*");
+                                            intent.setDataAndType(FileProvider.getUriForFile(MainActivity.this,
+                                                    BuildConfig.APPLICATION_ID + ".provider",
+                                                    songname), "audio/*");
                                             startActivity(intent);
                                         }
                                     });
@@ -384,7 +384,9 @@ public class MainActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             Intent intent = new Intent();
                                             intent.setAction(Intent.ACTION_VIEW);
-                                            intent.setDataAndType(Uri.fromFile(songname), "video/*");
+                                            intent.setDataAndType(FileProvider.getUriForFile(MainActivity.this,
+                                                    BuildConfig.APPLICATION_ID + ".provider",
+                                                    songname), "video/*");
                                             startActivity(intent);
                                         }
                                     });
