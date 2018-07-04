@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                         File saavnsong = new File (saavndir+"/songs/curr.mp3");
                         File saavnsong2 = new File (saavndir+"/songs/curr.mp4");
                         final String outdir = sdcard + "/Music";
-                        final File  songname = new File (outdir+"/"+mText.getText().toString()+extension);
+                        final File  songname = new File (outdir+"/"+mText.getText().toString()+".mp3");
 
                         try {
                             if (saavnsong.exists()) {
